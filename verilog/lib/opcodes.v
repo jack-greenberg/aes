@@ -3,7 +3,7 @@
 
   // Width of variables
   `define W_KEY        128
-  `define W_TEXT       128
+  `define W_STATE      128 // This is the 128 bit input, intel calls it state
   `define W_ROUNDKEY   128
 
   // Define inverse enable/disable

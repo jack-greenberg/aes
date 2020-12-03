@@ -4,7 +4,7 @@
   // Width of variables
   `define W_KEY        128
   `define W_ROUNDKEY   128
-  `define W_DATA       128 // This is the 128 bit input, intel calls it state
+  `define W_DATA       128 // This is the 128 bit input
   
   // Define inverse enable/disable
   `define INV_EN       `INV_CTRL'b1
@@ -13,6 +13,12 @@
   // Define passthru enable/disable
   `define PASS         `PASSTHRU_CTRL'b1
   `define NOPASS       `PASSTHRU_CTRL'b0
+
+  // Define instructions
+  `define AESENC      1  //This seems a bit sus to be numbering it like this, we might need to think of another way
+  `define AESENCLAST  2
+  `define AESDEC      3
+  `define AESDECLAST  4
 
   // Byte fields
   `define BYTE0      07:00

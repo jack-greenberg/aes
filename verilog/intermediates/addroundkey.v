@@ -7,27 +7,23 @@
 
 module ADDROUNDKEY
  (input                         clk, // not sure if we need this?
-  input      [`W_KEY-1:0]       key,
-  input      [`W_DATA-1:0]     state,
-  output reg [`W_DATA-1:0]     processed_state,
+  input      [`W_KEY-1:0]       roundkey,
+  input      [`W_DATA-1:0]      data,
+  output reg [`W_DATA-1:0]      new_data,
  );
 
   always @* begin
     if (`DEBUG_ADDROUNDKEY)
       /* verilator lint_off STMTDLY */
       #1 // Delay Slightly
-      $display("ADDROUNDKEY: key = %d text = %d processed_text = %d",key, text, processed_text);
+      $display("ADDROUNDKEY: roundkey = %d data = %d processed_text = %d",roundkey, data, new_data);
       /* verilator lint_on STMTDLY */
   end
 
   // always @(posedge clk) begin
   always @* begin
     // Compute processed text
-    processed_text = key ^ text
+    new_data = roundkey ^ data
   end
-
-
-
   
-
-
+endmodule

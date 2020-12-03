@@ -5,7 +5,7 @@
 
 module SUBBYTES
  (input                         clk,
-  input                         inv,
+  input                         inv_ctrl,
   input      [`W_DATA-1:0]      data,
   output reg [`W_DATA-1:0]      new_data,
  );
@@ -14,7 +14,7 @@ module SUBBYTES
     if (`DEBUG_SUBBYTES)
       /* verilator lint_off STMTDLY */
       #1 // Delay Slightly
-      $display("ALU: alu_op = %x A = %x B = %x R = %x",alu_op, A, B, R);
+      $display("SUBBYTES: inv_ctrl = %x data = %x new_data = %x",inv_ctrl, data, new_data);
       /* verilator lint_on STMTDLY */
   end
 
@@ -22,7 +22,7 @@ module SUBBYTES
   // Generate output(new_data) from lookup table byte by byte.
   //----------------------------------------------------------------
   always @* begin
-      if(inv == 1)
+      if(inv_ctrl == 1)
         assign new_data[`BYTE0] = inv_sbox[data[`BYTE0]];
         assign new_data[`BYTE1] = inv_sbox[data[`BYTE1]];
         assign new_data[`BYTE2] = inv_sbox[data[`BYTE2]];
@@ -584,3 +584,5 @@ module SUBBYTES
   assign inv_sbox[8'hfd] = 8'h21;
   assign inv_sbox[8'hfe] = 8'h0c;
   assign inv_sbox[8'hff] = 8'h7d;
+
+endmodule

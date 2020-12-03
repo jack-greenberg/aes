@@ -23,8 +23,8 @@
   `define AESDECLAST  4
 
   // Byte fields
-  `define BYTE0      07:00
-  `define BYTE1      15:08
+  `define BYTE0      7:0
+  `define BYTE1      15:8
   `define BYTE2      23:16
   `define BYTE3      31:24
   `define BYTE4      39:32
@@ -57,3 +57,4 @@
   `define REG_XMM13 `W_KEY'd13
   `define REG_XMM14 `W_KEY'd14
   `define REG_XMM15 `W_KEY'd15
+`endif

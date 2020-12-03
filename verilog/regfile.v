@@ -6,7 +6,7 @@ module REGFILE (
   input rst,
   input data_reg,
   input key_reg,
-  output reg [`W_STATE-1:0] data,
+  output reg [`W_DATA-1:0] data,
   output reg [`W_KEY-1:0] key
 );
   
@@ -25,6 +25,7 @@ module REGFILE (
         #1 // Delay slightly to correct print timing issue
         $display("REG FILE: data_reg = %d", data_reg);
         $display("          key_reg  = %d", key_reg);
+
         /* verilator lint_on STMTDLY */
         $display("$xmm0  = %x $xmm1 = %x $xmm2 = %x $xmm3 = %x",rf[`REG_XMM0], rf[`REG_XMM1],rf[`REG_XMM2],rf[`REG_XMM3]);
         $display("$xmm4  = %x $xmm5 = %x $xmm6 = %x $xmm7 = %x",rf[`REG_XMM4], rf[`REG_XMM5],rf[`REG_XMM6],rf[`REG_XMM7]);
@@ -34,7 +35,7 @@ module REGFILE (
     end
   end
 
-  assign  data = rf[data_reg]:0;
-  assign  key = rf[key_reg]:0;
+  assign data = rf[data_reg]:0;
+  assign key  = rf[key_reg]:0;
 
 endmodule

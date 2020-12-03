@@ -2,13 +2,11 @@
 `include "lib/debug.v"
 `timescale 1ns / 1 ps
 
-module DECODE
-  (input [`W_CPU-1:0] inst,
-
-  // Output registers
-  output reg [`W_REG-1:0]     inv_ctrl,      // Register Write Address
-  output reg [`W_REG-1:0]     passthru_ctrl,     // Register Read Address 1
-  );
+module DECODE (
+  input [`W_CPU-1:0] inst,
+  output reg [`W_REG-1:0] inv_ctrl,
+  output reg [`W_REG-1:0] passthru_ctrl
+);
 
 	always @(inst) begin
     if (`DEBUG_DECODE)

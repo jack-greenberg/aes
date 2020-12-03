@@ -1,17 +1,17 @@
 `include "lib/opcodes.v"
 `timescale 1ns / 1ps
 
-module ShiftRows (
+module SHIFTROWS (
   input clk,
-  input      [`W_DATA-1:0] data_in,
-  output reg [`W_DATA-1:0] data_out
+  input      [`W_DATA-1:0] data,
+  output reg [`W_DATA-1:0] new_data
 );
 
   always @(posedge clk) begin
-    data_out[(4*8)-1:0]       <= data_in[31:0];
-    data_out[(8*8)-1:(4*8)]   <= {data_in[(7*8)-1:(4*8)], data_in[(8*8)-1:(7*8)]};
-    data_out[(12*8)-1:(8*8)]  <= {data_in[(10*8)-1:(8*8)], data_in[(12*8)-1:(10*8)]};
-    data_out[(16*8)-1:(12*8)] <= {data_in[(13*8)-1:(12*8)], data_in[(16*8)-1:(13*8)]};
+    new_data[(4*8)-1:0]       <= data[31:0];
+    new_data[(8*8)-1:(4*8)]   <= {data[(7*8)-1:(4*8)], data[(8*8)-1:(7*8)]};
+    new_data[(12*8)-1:(8*8)]  <= {data[(10*8)-1:(8*8)], data[(12*8)-1:(10*8)]};
+    new_data[(16*8)-1:(12*8)] <= {data[(13*8)-1:(12*8)], data[(16*8)-1:(13*8)]};
   end
 
 

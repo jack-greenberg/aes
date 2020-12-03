@@ -9,21 +9,18 @@ module ADDROUNDKEY
  (input                         clk, // not sure if we need this?
   input      [`W_KEY-1:0]       roundkey,
   input      [`W_DATA-1:0]      data,
-  output reg [`W_DATA-1:0]      new_data,
+  output reg [`W_DATA-1:0]      new_data
  );
 
-  always @* begin
+  always @(posedge clk) begin
     if (`DEBUG_ADDROUNDKEY)
       /* verilator lint_off STMTDLY */
       #1 // Delay Slightly
       $display("ADDROUNDKEY: roundkey = %d data = %d processed_text = %d",roundkey, data, new_data);
       /* verilator lint_on STMTDLY */
+
+    // Compute processed text
+    new_data <= roundkey ^ data;
   end
 
-  // always @(posedge clk) begin
-  always @* begin
-    // Compute processed text
-    new_data = roundkey ^ data
-  end
-  
 endmodule

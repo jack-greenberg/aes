@@ -3,9 +3,9 @@
 
   // Width of variables
   `define W_KEY        128
-  `define W_DATA       128 // This is the 128 bit input, intel calls it state
   `define W_ROUNDKEY   128
-
+  `define W_DATA       128 // This is the 128 bit input, intel calls it state
+  
   // Define inverse enable/disable
   `define INV_EN       `INV_CTRL'b1
   `define INV_DIS      `INV_CTRL'b0

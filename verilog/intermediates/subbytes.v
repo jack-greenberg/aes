@@ -1,63 +1,69 @@
-`include "lib/opcodes.v"
-`include "lib/debug.v"
+`include "../lib/opcodes.v"
+`include "../lib/debug.v"
 
 `timescale 1ns / 1ps
 
 module SUBBYTES
- (input                         clk,
-  input                         inv_ctrl,
+//  (input                         clk,
+  (input                         inv_ctrl,
   input      [`W_DATA-1:0]      data,
-  output reg [`W_DATA-1:0]      new_data,
- );
+  output reg [`W_DATA-1:0]      new_data
+  );
 
-  always @* begin
-    if (`DEBUG_SUBBYTES)
+  // always @* begin
+  initial begin
+    if (`DEBUG_SUBBYTES) begin
       /* verilator lint_off STMTDLY */
       #1 // Delay Slightly
       $display("SUBBYTES: inv_ctrl = %x data = %x new_data = %x",inv_ctrl, data, new_data);
       /* verilator lint_on STMTDLY */
+    end
   end
 
   //----------------------------------------------------------------
   // Generate output(new_data) from lookup table byte by byte.
   //----------------------------------------------------------------
-  always @* begin
-      if(inv_ctrl == 1)
-        assign new_data[`BYTE0] = inv_sbox[data[`BYTE0]];
-        assign new_data[`BYTE1] = inv_sbox[data[`BYTE1]];
-        assign new_data[`BYTE2] = inv_sbox[data[`BYTE2]];
-        assign new_data[`BYTE3] = inv_sbox[data[`BYTE3]];
-        assign new_data[`BYTE4] = inv_sbox[data[`BYTE4]];
-        assign new_data[`BYTE5] = inv_sbox[data[`BYTE5]];
-        assign new_data[`BYTE6] = inv_sbox[data[`BYTE6]];
-        assign new_data[`BYTE7] = inv_sbox[data[`BYTE7]];
-        assign new_data[`BYTE8] = inv_sbox[data[`BYTE8]];
-        assign new_data[`BYTE9] = inv_sbox[data[`BYTE9]];
-        assign new_data[`BYTE10] = inv_sbox[data[`BYTE10]];
-        assign new_data[`BYTE11] = inv_sbox[data[`BYTE11]];
-        assign new_data[`BYTE12] = inv_sbox[data[`BYTE12]];
-        assign new_data[`BYTE13] = inv_sbox[data[`BYTE13]];
-        assign new_data[`BYTE14] = inv_sbox[data[`BYTE14]];
-        assign new_data[`BYTE15] = inv_sbox[data[`BYTE15]];
-      else
-        assign new_data[`BYTE0] = sbox[data[`BYTE0]];
-        assign new_data[`BYTE1] = sbox[data[`BYTE1]];
-        assign new_data[`BYTE2] = sbox[data[`BYTE2]];
-        assign new_data[`BYTE3] = sbox[data[`BYTE3]];
-        assign new_data[`BYTE4] = sbox[data[`BYTE4]];
-        assign new_data[`BYTE5] = sbox[data[`BYTE5]];
-        assign new_data[`BYTE6] = sbox[data[`BYTE6]];
-        assign new_data[`BYTE7] = sbox[data[`BYTE7]];
-        assign new_data[`BYTE8] = sbox[data[`BYTE8]];
-        assign new_data[`BYTE9] = sbox[data[`BYTE9]];
-        assign new_data[`BYTE10] = sbox[data[`BYTE10]];
-        assign new_data[`BYTE11] = sbox[data[`BYTE11]];
-        assign new_data[`BYTE12] = sbox[data[`BYTE12]];
-        assign new_data[`BYTE13] = sbox[data[`BYTE13]];
-        assign new_data[`BYTE14] = sbox[data[`BYTE14]];
-        assign new_data[`BYTE15] = sbox[data[`BYTE15]];
-
-  end
+  // always @* begin
+    always @(inv_ctrl or data) begin
+      if(inv_ctrl == 1) 
+        begin
+          assign new_data[`BYTE0] = inv_sbox[data[`BYTE0]];
+          assign new_data[`BYTE1] = inv_sbox[data[`BYTE1]];
+          assign new_data[`BYTE2] = inv_sbox[data[`BYTE2]];
+          assign new_data[`BYTE3] = inv_sbox[data[`BYTE3]];
+          assign new_data[`BYTE4] = inv_sbox[data[`BYTE4]];
+          assign new_data[`BYTE5] = inv_sbox[data[`BYTE5]];
+          assign new_data[`BYTE6] = inv_sbox[data[`BYTE6]];
+          assign new_data[`BYTE7] = inv_sbox[data[`BYTE7]];
+          assign new_data[`BYTE8] = inv_sbox[data[`BYTE8]];
+          assign new_data[`BYTE9] = inv_sbox[data[`BYTE9]];
+          assign new_data[`BYTE10] = inv_sbox[data[`BYTE10]];
+          assign new_data[`BYTE11] = inv_sbox[data[`BYTE11]];
+          assign new_data[`BYTE12] = inv_sbox[data[`BYTE12]];
+          assign new_data[`BYTE13] = inv_sbox[data[`BYTE13]];
+          assign new_data[`BYTE14] = inv_sbox[data[`BYTE14]];
+          assign new_data[`BYTE15] = inv_sbox[data[`BYTE15]];
+        end
+      else 
+        begin
+          assign new_data[`BYTE0] = sbox[data[`BYTE0]];
+          assign new_data[`BYTE1] = sbox[data[`BYTE1]];
+          assign new_data[`BYTE2] = sbox[data[`BYTE2]];
+          assign new_data[`BYTE3] = sbox[data[`BYTE3]];
+          assign new_data[`BYTE4] = sbox[data[`BYTE4]];
+          assign new_data[`BYTE5] = sbox[data[`BYTE5]];
+          assign new_data[`BYTE6] = sbox[data[`BYTE6]];
+          assign new_data[`BYTE7] = sbox[data[`BYTE7]];
+          assign new_data[`BYTE8] = sbox[data[`BYTE8]];
+          assign new_data[`BYTE9] = sbox[data[`BYTE9]];
+          assign new_data[`BYTE10] = sbox[data[`BYTE10]];
+          assign new_data[`BYTE11] = sbox[data[`BYTE11]];
+          assign new_data[`BYTE12] = sbox[data[`BYTE12]];
+          assign new_data[`BYTE13] = sbox[data[`BYTE13]];
+          assign new_data[`BYTE14] = sbox[data[`BYTE14]];
+          assign new_data[`BYTE15] = sbox[data[`BYTE15]];
+        end
+    end
 
 
   //----------------------------------------------------------------
@@ -586,3 +592,4 @@ module SUBBYTES
   assign inv_sbox[8'hff] = 8'h7d;
 
 endmodule
+
